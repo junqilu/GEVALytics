@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import re
 
 
 def calculate_weighted_average(input_df, bin_start_column='bin_start',
@@ -31,10 +32,13 @@ def calculate_mode(input_df, bin_start_column='bin_start',
     return mode_value
 
 
-def csv_files_in_dir(input_dir_str):
+def csv_files_in_dir(input_dir_str, pattern=re.compile(r'\d{2}\.\d{2}\.\d{'
+                                                       r'2}\.csv$')):
+    # r'\d{2}\.\d{2}\.\d{2}\.csv$' is the regex pattern that end my image
+    # files by default. It means a time stamp in short
     output_list = []
     for file in os.listdir(input_dir_str):
-        if file.endswith('.csv'):
+        if pattern.search(file):
             full_csv_file_dir = os.path.join(input_dir_str, file)  # Obtain
             # the absolute directory for file
             output_list.append(full_csv_file_dir)
