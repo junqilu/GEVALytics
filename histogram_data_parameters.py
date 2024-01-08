@@ -73,10 +73,23 @@ def process_single_csv(csv_file_dir):
         })
 
 
-def extract_all_parameters_from_csv_files(csv_files_list):
+def extract_all_parameters_from_csv_files(csv_files_list,
+                                          output_csv_saving_dir='output'
+                                                                '\\meta_data'
+                                                                '.csv'):
     parameter_df = pd.concat(
         [process_single_csv(file) for file in csv_files_list],
         ignore_index=True
     )
+
+    parameter_df.to_csv(
+        output_csv_saving_dir,
+        index=False
+    )  # Save the csv locally, so you can split on the csv_file_name column
+    # into several meaningful columns
+
+    print('meta_data.csv has been saved to {}. Label the data as you like '
+          'locally using Excel before import it back for later steps!'.format(
+        output_csv_saving_dir))
 
     return parameter_df
