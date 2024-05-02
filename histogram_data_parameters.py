@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import re
 
 
 def calculate_weighted_average(input_df, bin_start_column='bin_start',
@@ -31,13 +32,17 @@ def calculate_mode(input_df, bin_start_column='bin_start',
     return mode_value
 
 
-def csv_files_in_dir(input_dir_str):
+def csv_files_in_dir(input_dir_str, pattern=re.compile(r'\d{2}\.\d{2}\.\d{'
+                                                         r'2}\.csv$')):
+    # r'\d{2}\.\d{2}\.\d{2}\.csv$' is the regex pattern that end my image
+    # files by default. It means a time stamp in short
     output_list = []
-    for file in os.listdir(input_dir_str):
-        if file.endswith('.csv'):
-            full_csv_file_dir = os.path.join(input_dir_str, file)  # Obtain
-            # the absolute directory for file
-            output_list.append(full_csv_file_dir)
+    for root, dirs, files in os.walk(input_dir_str):
+        for file in files:
+            if pattern.search(file):
+                full_csv_file_dir = os.path.join(root, file)  # Obtain
+                # the absolute directory for file
+                output_list.append(full_csv_file_dir)
 
     return output_list
 
@@ -69,10 +74,23 @@ def process_single_csv(csv_file_dir):
         })
 
 
-def extract_all_parameters_from_csv_files(csv_files_list):
+def extract_all_parameters_from_csv_files(csv_files_list,
+                                          output_csv_saving_dir='output'
+                                                                '\\meta_data'
+                                                                '.csv'):
     parameter_df = pd.concat(
         [process_single_csv(file) for file in csv_files_list],
         ignore_index=True
     )
+
+    parameter_df.to_csv(
+        output_csv_saving_dir,
+        index=False
+    )  # Save the csv locally, so you can split on the csv_file_name column
+    # into several meaningful columns
+
+    print('meta_data.csv has been saved to {}. Label the data as you like '
+          'locally using Excel before import it back for later steps!'.format(
+        output_csv_saving_dir))
 
     return parameter_df

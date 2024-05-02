@@ -14,7 +14,12 @@ def plot_lines(file_names, line_labels, color, label_prefix,
     for file_name, line_label in zip(file_names, line_labels):
         df = pd.read_csv(file_name)
         dfs.append(df)
-        plt.plot(df[bin_start_column], df[count_column], color=color)
+        plt.plot(
+            df[bin_start_column],
+            df[count_column],
+            color=color,
+            alpha=0.3
+        )
 
 
 def display_all_histogram_as_line_plots(input_csv_files_list,

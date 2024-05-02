@@ -145,14 +145,17 @@ def plot_original_vs_filtered_worker(original_df, filtered_df,
 
 def plot_original_vs_filtered(original_df, starting_quantile=0.25,
                               ending_quantile=0.75,
-                              iqr_multiplication_factor=1.5):
+                              iqr_multiplication_factor=1.5, plot_show=True):
     filtered_df = filter_df_by_IQR(original_df, starting_quantile,
                                    ending_quantile,
                                    iqr_multiplication_factor)
 
-    plot_original_vs_filtered_worker(original_df, filtered_df,
-                                     starting_quantile,
-                                     ending_quantile,
-                                     iqr_multiplication_factor)
+    if plot_show == True: # Only show the plot when the user wants to see
+        # it. You need to set this to False when processing lots of csv
+        # files in a batch mode. Otherwise, you'll have lots of plots
+        plot_original_vs_filtered_worker(original_df, filtered_df,
+                                         starting_quantile,
+                                         ending_quantile,
+                                         iqr_multiplication_factor)
 
     return filtered_df
