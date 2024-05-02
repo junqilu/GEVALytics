@@ -33,15 +33,16 @@ def calculate_mode(input_df, bin_start_column='bin_start',
 
 
 def csv_files_in_dir(input_dir_str, pattern=re.compile(r'\d{2}\.\d{2}\.\d{'
-                                                       r'2}\.csv$')):
+                                                         r'2}\.csv$')):
     # r'\d{2}\.\d{2}\.\d{2}\.csv$' is the regex pattern that end my image
     # files by default. It means a time stamp in short
     output_list = []
-    for file in os.listdir(input_dir_str):
-        if pattern.search(file):
-            full_csv_file_dir = os.path.join(input_dir_str, file)  # Obtain
-            # the absolute directory for file
-            output_list.append(full_csv_file_dir)
+    for root, dirs, files in os.walk(input_dir_str):
+        for file in files:
+            if pattern.search(file):
+                full_csv_file_dir = os.path.join(root, file)  # Obtain
+                # the absolute directory for file
+                output_list.append(full_csv_file_dir)
 
     return output_list
 
