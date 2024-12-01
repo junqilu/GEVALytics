@@ -4,6 +4,14 @@ processing of microscopy images from the GTP biosensor (GEVAL). It also features
 
 You can read [here](GEVALIris_GEVALytics_presentation.pdf)  for 
 more information on the importance of measuring unbound GTP concentrations in live cells and how these measurements reveal the influence of GTP concentration on protrusions and the invasiveness of melanoma.
+* GEVAL was developed by the Nikiforov Lab in the Biomedical Engineering 
+  Department at Duke University and was featured in a [Nature publication](https://www.nature.com/articles/s41467-021-26324-6).
+
+The combination of the ImageJ plugin ***GEVALIris*** and the machine learning 
+model ***GEVALytics*** enables automatic image screening with expert-level 
+accuracy and strong generalization. This system effectively identifies 
+suboptimal images, providing GEVAL users with a reliable solution that can 
+be utilized __anytime__ and __anywhere__.
 
 # Workflow
 ## Wet lab operations
@@ -21,8 +29,6 @@ refer to this GitHub repository [GEVALIris](https://github.com/junqilu/GEVALIris
 ## Machine learning model
 ![ML_model.png](readme_images/ML_model.png)
 
-The combination of the ImageJ plugin ***GEVALIris*** and the machine learning 
-model ***GEVALytics*** enables automatic image screening with expert-level 
-accuracy and strong generalization. This system effectively identifies 
-suboptimal images, providing GEVAL users with a reliable solution that can 
-be utilized __anytime__ and __anywhere__.
+The best trained RF model is stored as `models/best_rf_classifier.pkl`
+* The same directory also contains the results of the performance 
+  evaluation of this model. 
