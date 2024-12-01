@@ -4,6 +4,8 @@ processing of microscopy images from the GTP biosensor (GEVAL). It also features
 
 You can read [here](GEVALIris_GEVALytics_presentation.pdf)  for 
 more information on the importance of measuring unbound GTP concentrations in live cells and how these measurements reveal the influence of GTP concentration on protrusions and the invasiveness of melanoma.
+* GEVAL was developed by the Nikiforov Lab in the Biomedical Engineering 
+  Department at Duke University and was featured in a [Nature publication](https://www.nature.com/articles/s41467-021-26324-6).
 
 # Workflow
 ## Wet lab operations
